@@ -5,7 +5,7 @@ export default (OriginalComponent) => class WrappedComponent extends ReactCompon
    
     state = {
         isOpen: false,
-        openArticlId : null
+      
     }
    
   
@@ -14,7 +14,7 @@ export default (OriginalComponent) => class WrappedComponent extends ReactCompon
        
         return(
             <OriginalComponent {...this.props} {...this.state} toggleOpen = {this.toggleOpen }
-            toggleOpenArticl = {this.toggleOpenArticl}/>
+            />
         )
     }
     
@@ -24,12 +24,5 @@ export default (OriginalComponent) => class WrappedComponent extends ReactCompon
         isOpen: !this.state.isOpen
         })}
 
-    toggleOpenArticl = (openArticlId ) => (ev) => {
-        
-      if(this.state.openArticlId === openArticlId){
-        this.setState({openArticlId: null})
-      }else{
-             this.setState({openArticlId})
-            }
-        }     
+       
 }

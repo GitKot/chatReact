@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Comment from './Comments'
 import toggleOpen from '../Decorators/toggleOpen'
+import NewComment from './NewComment/NewComments'
 
 class CommentList extends Component {
     
@@ -11,11 +12,12 @@ class CommentList extends Component {
          const comments = article.comments
          
     
-        const commentList = isOpen && <Comment comments = {comments} /> 
+        const commentList = isOpen && <div><Comment comments = {comments} /> <NewComment/> </div>
         return(
            <div>
                <button onClick = {toggleOpen}>{isOpen ? 'Close Comments':'Open Comments'}</button>
                {commentList}
+              
            </div>
             
         )

@@ -3,6 +3,9 @@ import CommentList from  './CommentList'
 import PropTypes from 'prop-types'
 import toggleOpen from '../Decorators/toggleOpen'
 
+import { CSSTransitionGroup } from 'react-transition-group'
+import './article.css'
+
  class Article extends Component{
      static propTypes = {
          article: PropTypes.shape({
@@ -15,16 +18,22 @@ import toggleOpen from '../Decorators/toggleOpen'
     
     
     render(){
-      
-        const {article, isOpen, toggleOpenArticl} = this.props
-        
-     
-    return(
-    <div ref = {(node) => console.log(node)}>
+      const {article, isOpen, toggleOpenArticl} = this.props
+     return(
+        <div>
         <h3>{article.title}</h3>
         <button onClick = {toggleOpenArticl}>{isOpen? "Close": "Open"}</button>
-        {this.getBody()}
-    </div>
+        
+        <CSSTransitionGroup
+          transitionName="article"
+          transitionEnterTimeout={700}
+          transitionLeaveTimeout={400}
+          transitionAppear={true}
+           transitionAppearTimeout={500}>
+            {this.getBody()}
+            </CSSTransitionGroup>
+     
+         </div>
     )
 }
 
@@ -32,11 +41,9 @@ getBody = () => {
     const {isOpen} = this.props
     const {article} = this.props
     if(isOpen) return (
-       
-         <section>{article.text}
-        
+         <div>{article.text}
          <CommentList article = {article}/>
-         </section>
+         </div>
          )
 }
 
