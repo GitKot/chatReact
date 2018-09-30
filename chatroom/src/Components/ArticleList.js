@@ -1,10 +1,15 @@
 import React, {Component} from 'react'
-import Article from './Article'
+import Article from './Articl'
 import WrappedArticl from '../Decorators/ArticlDecorator'
+
+import {connect} from 'react-redux'
+
 
 class  ArticleList extends Component{
     
     render(){
+    console.log('this',this.props);
+    
     const {articles}  = this.props
     const articlElements = articles.map((articl) => <li key={articl.id}><Article article = {articl}
     isOpen = { articl.id === this.props.openArticlId }
@@ -19,4 +24,4 @@ class  ArticleList extends Component{
   
 }
 
-export default WrappedArticl(ArticleList)
+export default connect((state) => ({articles: state.articles}) )(WrappedArticl(ArticleList))
