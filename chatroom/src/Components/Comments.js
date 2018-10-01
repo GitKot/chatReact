@@ -1,16 +1,12 @@
 import React, {Component} from 'react'
-
+import {connect} from 'react-redux'
+import {commentSelector} from '../Selectors'
 class Comment extends Component {
     static defaultProps={
-        comments:[]
+        // comments:[]
     }
-    
-    render(){
-      
-
-  
-       
-        return(
+ render(){
+             return(
             <ul>
              {this.getCommentList()} 
              </ul>
@@ -18,7 +14,7 @@ class Comment extends Component {
     }
     getCommentList = () => {
         const {comments} = this.props
-        console.log("comments", comments.length)
+        console.log("comments", comments)
       
         if (comments.length == 0) return <p>{"No Comments"}</p>
 
@@ -26,4 +22,8 @@ class Comment extends Component {
         
     }
 }
-export default Comment
+export default connect( (state, ownProps) => {
+       
+    return {comments: commentSelector(state, ownProps)}
+}
+     )(Comment)

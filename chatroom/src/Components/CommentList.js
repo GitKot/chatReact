@@ -9,10 +9,10 @@ class CommentList extends Component {
     
     render(){
          const  {article, isOpen, toggleOpen} = this.props
-         const comments = article.comments
-         
+         const {comments} = article
+        console.log("comments777777",comments)
     
-        const commentList = isOpen && <div><Comment comments = {comments} /> <NewComment/> </div>
+        const commentList = isOpen && <div><Comment id = {comments}/> <NewComment/> </div>
         return(
            <div>
                <button onClick = {toggleOpen}>{isOpen ? 'Close Comments':'Open Comments'}</button>

@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import Article from './Articl'
 import WrappedArticl from '../Decorators/ArticlDecorator'
-
 import {connect} from 'react-redux'
+import {filtratedArticlesSelector} from '../Selectors/index'
 
 
 class  ArticleList extends Component{
@@ -24,4 +24,10 @@ class  ArticleList extends Component{
   
 }
 
-export default connect((state) => ({articles: state.articles}) )(WrappedArticl(ArticleList))
+
+export default connect( (state) =>{
+
+ return {
+     articles: filtratedArticlesSelector(state)
+ }
+ } ) (WrappedArticl(ArticleList))
