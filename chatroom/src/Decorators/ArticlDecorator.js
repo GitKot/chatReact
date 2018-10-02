@@ -13,7 +13,7 @@ this.state = {
   
     render (){
      
-       console.log('decor', this.props)
+       
         return(
             <OriginalComponent {...this.props} {...this.state} 
             toggleOpenArticl = {this.toggleOpenArticl}/>

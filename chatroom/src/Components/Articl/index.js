@@ -6,7 +6,7 @@ import toggleOpen from '../../Decorators/toggleOpen'
 import { CSSTransitionGroup } from 'react-transition-group'
 import './article.css'
 import {connect} from 'react-redux'
-import {deleteArticl} from '../../AC/ACcounter'
+import {deleteArticl} from '../../AC/ACreators'
 
  class Article extends Component{
      static propTypes = {
@@ -50,6 +50,7 @@ getBody = () => {
 }
 handlDelete = () => {
     const {deleteArticl, article} =this.props
+    
     deleteArticl(article.id)
 }
 

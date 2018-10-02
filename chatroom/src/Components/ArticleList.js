@@ -8,7 +8,7 @@ import {filtratedArticlesSelector} from '../Selectors/index'
 class  ArticleList extends Component{
     
     render(){
-    console.log('this',this.props);
+    
     
     const {articles}  = this.props
     const articlElements = articles.map((articl) => <li key={articl.id}><Article article = {articl}
@@ -26,7 +26,7 @@ class  ArticleList extends Component{
 
 
 export default connect( (state) =>{
-
+    
  return {
      articles: filtratedArticlesSelector(state)
  }

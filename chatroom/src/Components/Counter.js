@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {ACcounter} from '../AC/ACcounter'
+import {ACcounter} from '../AC/ACreators'
 
 class Counter extends Component {
 
@@ -10,7 +10,7 @@ class Counter extends Component {
     }
 
     render(){
-      console.log(this.props)
+     
         return (
             <div>
                 <h2>{this.props.counter}</h2>

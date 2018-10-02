@@ -1,5 +1,5 @@
 
-import {INCREMENT, DELETE_ARTICL, CHANGE_DATE_RANGE, CHANGE_SELECTION} from '../CONSTANTS'
+import {INCREMENT, DELETE_ARTICL, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT} from '../CONSTANTS'
 
 
 export function ACcounter(){
@@ -22,10 +22,17 @@ export function changeDateFilter(dateRange){
 }
 
 export function selectedFilter(selected){
-    const vv = {selected}
-    
     return{
         type:CHANGE_SELECTION,
         payload: {selected}
     }
 }
+
+export function addComment(comment, articleId){
+    return {
+        type:ADD_COMMENT,
+        payload: {comment, articleId},
+        generateId: true
+    }
+}
+

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {commentSelector} from '../Selectors'
+
 class Comment extends Component {
     static defaultProps={
         // comments:[]
@@ -14,7 +15,7 @@ class Comment extends Component {
     }
     getCommentList = () => {
         const {comments} = this.props
-        console.log("comments", comments)
+       console.log(comments)
       
         if (comments.length == 0) return <p>{"No Comments"}</p>
 

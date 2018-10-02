@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import './newC.css'
+import {connect} from 'react-redux'
+import {addComment} from '../../AC/ACreators'
 
-export default class NewComment extends Component {
+class NewComment extends Component {
 
     state ={
         user: '',
@@ -41,6 +43,12 @@ export default class NewComment extends Component {
 
 
     handleSubmit=(ev)=>{
+        const {addComment, id} = this.props
+        const comment = {...this.state}
+        console.log('id',id)
+        
+        addComment(comment, id)
+
         ev.preventDefault();
         this.setState({
             user: '',
@@ -59,3 +67,6 @@ const limits = {
         max:50
         }
 }
+
+
+export default  connect((state, ownProps)=>{return ownProps},{addComment})(NewComment)

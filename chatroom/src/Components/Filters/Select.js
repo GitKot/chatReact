@@ -1,13 +1,17 @@
 import React, {Component} from 'react'
 import Select from 'react-select'
-import {selectedFilter} from '../../AC/ACcounter'
+import {selectedFilter} from '../../AC/ACreators'
 import {connect} from 'react-redux'
 
 class Selected extends Component {
   
     render(){
-        console.log('selected',this.props)
-        const options = this.props.articles.map(articl => ({
+     
+        const {articles} = this.props
+        const arrArticls = Object.values(articles)
+
+        
+        const options = arrArticls.map(articl => ({
             label: articl.title,
             value: articl.id
         }))
