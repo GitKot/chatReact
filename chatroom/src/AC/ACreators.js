@@ -1,5 +1,5 @@
 
-import {INCREMENT, DELETE_ARTICL, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT} from '../CONSTANTS'
+import {INCREMENT, DELETE_ARTICL, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT, LOAD_OLL_ARTICLES} from '../CONSTANTS'
 
 
 export function ACcounter(){
@@ -36,3 +36,10 @@ export function addComment(comment, articleId){
     }
 }
 
+export function loadallArticles (){
+    return{
+        type:LOAD_OLL_ARTICLES,
+        callAPI: "/article"
+
+    }
+}

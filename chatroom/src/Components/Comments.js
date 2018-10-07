@@ -6,6 +6,10 @@ class Comment extends Component {
     static defaultProps={
         // comments:[]
     }
+
+    // componentWillUpdate(){
+    //     console.log("update")
+    // }
  render(){
              return(
             <ul>
@@ -23,6 +27,9 @@ class Comment extends Component {
         
     }
 }
+
+
+
 export default connect( (state, ownProps) => {
        
     return {comments: commentSelector(state, ownProps)}

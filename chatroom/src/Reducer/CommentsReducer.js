@@ -10,7 +10,7 @@ export default (commentsState = arrToMap(defaultComments), action)=>{
         
         case ADD_COMMENT:
         
-        console.log(randomId, payload.comment)
+       
         payload.comment.id=randomId // добавили id в новый commnt
         return {...commentsState, [randomId]: payload.comment  }
     }

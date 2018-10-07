@@ -16,7 +16,7 @@ const  initiasState = {
 
          case CHANGE_SELECTION : return {...filters, selected: payload.selected}
 
-        //  case DELETE_ARTICLE: return { ...filters, selected: filters.selected.filter(id => id !==payload.id)}    
+          case DELETE_ARTICLE: return { ...filters, selected: filters.selected.filter(id => id !==payload.id)}    
 
      }
 return filters

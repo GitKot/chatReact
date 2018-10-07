@@ -45,7 +45,7 @@ class NewComment extends Component {
     handleSubmit=(ev)=>{
         const {addComment, id} = this.props
         const comment = {...this.state}
-        console.log('id',id)
+       
         
         addComment(comment, id)
 
