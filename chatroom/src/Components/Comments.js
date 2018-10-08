@@ -19,7 +19,7 @@ class Comment extends Component {
     }
     getCommentList = () => {
         const {comments} = this.props
-       console.log(comments)
+     
       
         if (comments.length == 0) return <p>{"No Comments"}</p>
 

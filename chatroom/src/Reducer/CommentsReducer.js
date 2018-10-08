@@ -5,7 +5,7 @@ import {arrToMap} from '../helpers'
 
 export default (commentsState = arrToMap(defaultComments), action)=>{
     const {type, payload, randomId} = action
-   console.log(commentsState)
+  
     switch(type){
         
         case ADD_COMMENT:

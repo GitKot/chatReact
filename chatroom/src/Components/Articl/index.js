@@ -7,6 +7,8 @@ import { CSSTransitionGroup } from 'react-transition-group'
 import './article.css'
 import {connect} from 'react-redux'
 import {deleteArticl} from '../../AC/ACreators'
+import {loadArticle} from '../../AC/ACreators'
+import Loader from '../loader'
 
  class Article extends Component{
      static propTypes = {
@@ -17,7 +19,11 @@ import {deleteArticl} from '../../AC/ACreators'
          }).isRequired
      }
      
-    
+    componentWillReceiveProps({isOpen, loadArticle, article}){
+       
+        if( isOpen && !article.text && !article.loading )loadArticle(article.id)
+    }
+
     
     render(){
       const {article, isOpen, toggleOpenArticl} = this.props
@@ -42,6 +48,9 @@ import {deleteArticl} from '../../AC/ACreators'
 getBody = () => {
     const {isOpen} = this.props
     const {article} = this.props
+   
+    if(!isOpen) return null
+    if(article.loading) return <Loader/>
     if(isOpen) return (
          <div>{article.text}
          <CommentList article = {article}/>
@@ -50,11 +59,11 @@ getBody = () => {
 }
 handlDelete = () => {
     const {deleteArticl, article} =this.props
-    
+   
     deleteArticl(article.id)
 }
 
 
 }
 
-export default  connect(null, { deleteArticl })(Article)
+export default  connect(null, { deleteArticl, loadArticle })(Article)

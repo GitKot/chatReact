@@ -4,17 +4,20 @@ import WrappedArticl from '../Decorators/ArticlDecorator'
 import {connect} from 'react-redux'
 import {filtratedArticlesSelector} from '../Selectors/index'
 import {loadallArticles} from '../AC/ACreators'
+import Loader from './loader'
 
 class  ArticleList extends Component{
     
     componentDidMount(){
-        this.props.loadallArticles()
+        const {loaded, loading, loadallArticles} = this.props
+        if(!loaded || !loading) loadallArticles()
     }
-
     render(){
-        const {articles}  = this.props
+        const {articles, loading, openArticlId}  = this.props
+        
+        if (loading) return <Loader/>
     const articlElements = articles.map((articl) => <li key={articl.id}><Article article = {articl}
-    isOpen = { articl.id === this.props.openArticlId }
+    isOpen = { articl.id === openArticlId }
     toggleOpenArticl = {this.props.toggleOpenArticl(articl.id)}/></li>)
 
     return(
@@ -23,13 +26,12 @@ class  ArticleList extends Component{
         </ul>
     )
     }
-  
 }
 
-
 export default connect( (state) =>{
-    
  return {
-     articles: filtratedArticlesSelector(state)
+     articles: filtratedArticlesSelector(state),
+     loading: state.articles.loading,
+     loaded: state.articles.loaded
  }
  }, {loadallArticles} ) (WrappedArticl(ArticleList))

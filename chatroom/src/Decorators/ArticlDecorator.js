@@ -8,20 +8,12 @@ this.state = {
     openArticlId : props.defaultOpen
 }
    }
-    
-   
-  
     render (){
-     
-       
-        return(
+           return(
             <OriginalComponent {...this.props} {...this.state} 
             toggleOpenArticl = {this.toggleOpenArticl}/>
         )
     }
-    
-    
-
     toggleOpenArticl = (openArticlId ) => (ev) => {
         
       if(this.state.openArticlId === openArticlId){

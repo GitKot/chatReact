@@ -1,27 +1,55 @@
 import {normalizedArticles as defaultArticles} from '../fixtures'
-import { DELETE_ARTICL, ADD_COMMENT, LOAD_OLL_ARTICLES} from '../CONSTANTS'
+import { DELETE_ARTICL, ADD_COMMENT, LOAD_OLL_ARTICLES, START, SUCCESS, FAIL, LOAD_ARTICLE} from '../CONSTANTS'
 import {arrToMap} from  '../helpers'
+import { Map, Record, OrderedMap } from 'immutable'
+
+const ArticlRecord = Record({
+    text: undefined,
+    title: '',
+    id: undefined,
+    comments: [],
+    loading: false,
+    date:''
+})
 
 
-export default (articleState = {}, action) => {
+const ReduserState = new Record({
+    loading: false,
+    loaded: false,
+    entities: new OrderedMap({})
+}) 
+
+const defaultState = new ReduserState()
+
+export default (articleState = defaultState, action) => {
     console.log(articleState)
     const {type, payload, response, randomId} = action
     switch(type){
         case DELETE_ARTICL: 
-            const tmpState = {...articleState}
-            delete tmpState[payload.id]
-            return tmpState
+            return articleState.deleteIn(['entities', payload.id])
 
         case ADD_COMMENT:
-            const article = articleState[payload.articleId]
-            return {...articleState,
-                [payload.articleId]: {...article, 
-                    comments: ( article.comments || []).concat(randomId)
-                }
-            }
+            return articleState.updateIn(['entities', payload.articleId, 'comments'], comments => comments.concat(randomId))
 
-        case LOAD_OLL_ARTICLES:
-            return arrToMap(response)
+
+        case  LOAD_OLL_ARTICLES + START:
+           
+            return articleState.set('loading', true)
+
+        case LOAD_OLL_ARTICLES+SUCCESS:
+            return articleState
+                    .set('entities', arrToMap(response, ArticlRecord))
+                    .set('loading', false)
+                    .set('loaded', true ) 
+
+
+        case LOAD_ARTICLE + START:   
+             return articleState.setIn(['entities', payload.id, 'loading'], true)
+
+        case LOAD_ARTICLE + SUCCESS:   
+           
+             return articleState.setIn(['entities', payload.id], new ArticlRecord(payload.response))
+        
     }
     return articleState
 }

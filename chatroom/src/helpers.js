@@ -1,10 +1,9 @@
 import React from 'react'
+import {OrderedMap, Map} from 'immutable'
 
-export const arrToMap=(array) => array.reduce((acc, articl) =>{
-    acc[articl.id] = articl
-    return acc
-    }, {})
+export const arrToMap=(array, DataRecord = Map) => array.reduce((acc, item) =>{
+    return acc.set(item.id, new DataRecord(item))}, new OrderedMap({}) )
 
 export function mapToArr(obj) {
-    return Object.keys(obj).map(id => obj[id])
+    return obj.valueSeq().toArray()
 }    

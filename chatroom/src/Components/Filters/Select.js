@@ -2,13 +2,13 @@ import React, {Component} from 'react'
 import Select from 'react-select'
 import {selectedFilter} from '../../AC/ACreators'
 import {connect} from 'react-redux'
-
+import {mapToArr} from '../../helpers'
 class Selected extends Component {
   
     render(){
      
         const {articles} = this.props
-        const arrArticls = Object.values(articles)
+        const arrArticls = mapToArr(articles.entities)
 
         
         const options = arrArticls.map(articl => ({

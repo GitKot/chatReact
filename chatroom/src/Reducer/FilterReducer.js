@@ -10,7 +10,7 @@ const  initiasState = {
 
  function Filters(filters=initiasState, action){
      const {type, payload} = action
-     
+     console.log(type, payload)
      switch(type){
          case CHANGE_DATE_RANGE :return {...filters, dateRange: payload.dateRange}
 
