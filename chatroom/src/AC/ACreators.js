@@ -67,21 +67,22 @@ export function loadArticle(id){
 }
 
 
-export function loadComments(id){
+export function loadComments(articleId){
     console.log("loadComments")
         return (dispatch) => {
-            fetch('/comment')
+            setTimeout(()=> {
+            fetch(`/comment?article=${articleId}`)
             .then(resp => resp.json())
             .then(resp => dispatch({
                 type: LOAD_COMMENTS,
-                payload: {resp}
+                payload: {articleId, resp}
             }))
             .catch(error => dispatch({
                 type:LOAD_COMMENTS + FAIL,
                 payload: {error}
             }))
-        }
-        }
+        }, 500)
+        }}
 
 // export function loadArticle(id){
 //     return {

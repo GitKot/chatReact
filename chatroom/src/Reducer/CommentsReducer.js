@@ -8,12 +8,11 @@ const CommentsRecord = Record({
     text: undefined,
     user: '',
     id: undefined,
-    loading: false,
+   
 })
 
 const ComentsState = new Record({
-    loading: false,
-    loaded: false,
+   
     entities: new OrderedMap({})
 }) 
 
@@ -26,21 +25,14 @@ export default (commentsState = defaultCommet, action)=>{
 
     switch(type){
         case ADD_COMMENT:
-            payload.comment.id=randomId // добавили id в новый commnt
-            return {...commentsState, [randomId]: payload.comment  }
-
-        case LOAD_COMMENTS + START:
-       
-            return  commentsState
-            .set('loaded', false)
-            .set('loading', true)
+             return commentsState.setIn(['entities', randomId],
+             new CommentsRecord({...payload.comment, id: randomId }))
+            
 
         case LOAD_COMMENTS:
-        console.log("responseSUCCESS", payload.resp.records)
-            return  commentsState
-            .set('entities', arrToMap(payload.resp.records, CommentsRecord))
-            .set('loaded', true)
-            .set('loading', false)
+        console.log("responseSUCCESS", payload.resp)
+            return  commentsState.update('entities',  (entities)=> entities.merge(arrToMap(payload.resp, CommentsRecord)))
+          
     }
     return commentsState
 }
