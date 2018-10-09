@@ -22,7 +22,7 @@ const ReduserState = new Record({
 const defaultState = new ReduserState()
 
 export default (articleState = defaultState, action) => {
-    console.log(articleState)
+   
     const {type, payload, response, randomId} = action
     switch(type){
         case DELETE_ARTICL: 
@@ -37,6 +37,7 @@ export default (articleState = defaultState, action) => {
             return articleState.set('loading', true)
 
         case LOAD_OLL_ARTICLES+SUCCESS:
+        console.log('response', response)
             return articleState
                     .set('entities', arrToMap(response, ArticlRecord))
                     .set('loading', false)

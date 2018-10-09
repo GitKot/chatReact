@@ -10,6 +10,9 @@ class Comment extends Component {
     // componentWillUpdate(){
     //     console.log("update")
     // }
+
+   
+
  render(){
              return(
             <ul>
@@ -17,14 +20,12 @@ class Comment extends Component {
              </ul>
         )
     }
+
     getCommentList = () => {
         const {comments} = this.props
-     
-      
         if (comments.length == 0) return <p>{"No Comments"}</p>
 
         return  comments.map((comment)=> <li key={comment.id}><b>by: {comment.user}</b><br/>{comment.text}</li>) 
-        
     }
 }
 
@@ -33,5 +34,4 @@ class Comment extends Component {
 export default connect( (state, ownProps) => {
        
     return {comments: commentSelector(state, ownProps)}
-}
-     )(Comment)
+})(Comment)

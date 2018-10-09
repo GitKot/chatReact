@@ -1,5 +1,5 @@
 
-import {INCREMENT, DELETE_ARTICL, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT, LOAD_OLL_ARTICLES, LOAD_ARTICLE, START, SUCCESS, FAIL} from '../CONSTANTS'
+import {INCREMENT, DELETE_ARTICL, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT, LOAD_OLL_ARTICLES, LOAD_ARTICLE, START, SUCCESS, FAIL, LOAD_COMMENTS} from '../CONSTANTS'
 
 
 export function ACcounter(){
@@ -51,7 +51,6 @@ export function loadArticle(id){
           type:LOAD_ARTICLE + START,
           payload: {id}
         })
-
         setTimeout(()=> {
             fetch(`/article/${id}`)
             .then(res=>  res.json() ) 
@@ -66,6 +65,24 @@ export function loadArticle(id){
         }, 1000)
     }
 }
+
+
+export function loadComments(id){
+    console.log("loadComments")
+        return (dispatch) => {
+            fetch('/comment')
+            .then(resp => resp.json())
+            .then(resp => dispatch({
+                type: LOAD_COMMENTS,
+                payload: {resp}
+            }))
+            .catch(error => dispatch({
+                type:LOAD_COMMENTS + FAIL,
+                payload: {error}
+            }))
+        }
+        }
+
 // export function loadArticle(id){
 //     return {
 //         type: LOAD_ARTICLE,

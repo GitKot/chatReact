@@ -5,13 +5,16 @@ import {connect} from 'react-redux'
 import {filtratedArticlesSelector} from '../Selectors/index'
 import {loadallArticles} from '../AC/ACreators'
 import Loader from './loader'
+import {loadComments} from '../AC/ACreators'
 
 class  ArticleList extends Component{
     
     componentDidMount(){
-        const {loaded, loading, loadallArticles} = this.props
+        const {loaded, loading, loadallArticles, loadComments} = this.props
+        loadComments()
         if(!loaded || !loading) loadallArticles()
     }
+
     render(){
         const {articles, loading, openArticlId}  = this.props
         
@@ -32,6 +35,7 @@ export default connect( (state) =>{
  return {
      articles: filtratedArticlesSelector(state),
      loading: state.articles.loading,
-     loaded: state.articles.loaded
+     loaded: state.articles.loaded,
+     
  }
- }, {loadallArticles} ) (WrappedArticl(ArticleList))
+ }, {loadallArticles, loadComments} ) (WrappedArticl(ArticleList))

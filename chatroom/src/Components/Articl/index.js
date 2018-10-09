@@ -2,13 +2,13 @@ import React, {Component} from 'react'
 import CommentList from  '../CommentList'
 import PropTypes from 'prop-types'
 import toggleOpen from '../../Decorators/toggleOpen'
-
 import { CSSTransitionGroup } from 'react-transition-group'
 import './article.css'
 import {connect} from 'react-redux'
 import {deleteArticl} from '../../AC/ACreators'
 import {loadArticle} from '../../AC/ACreators'
 import Loader from '../loader'
+
 
  class Article extends Component{
      static propTypes = {
@@ -22,6 +22,7 @@ import Loader from '../loader'
     componentWillReceiveProps({isOpen, loadArticle, article}){
        
         if( isOpen && !article.text && !article.loading )loadArticle(article.id)
+        
     }
 
     
@@ -48,7 +49,8 @@ import Loader from '../loader'
 getBody = () => {
     const {isOpen} = this.props
     const {article} = this.props
-   
+  
+
     if(!isOpen) return null
     if(article.loading) return <Loader/>
     if(isOpen) return (
@@ -66,4 +68,4 @@ handlDelete = () => {
 
 }
 
-export default  connect(null, { deleteArticl, loadArticle })(Article)
+export default  connect(null, { deleteArticl, loadArticle})(Article)
