@@ -1,11 +1,9 @@
 import React, {Component} from 'react'
-import Article from './Articl'
-import WrappedArticl from '../Decorators/ArticlDecorator'
 import {connect} from 'react-redux'
 import {filtratedArticlesSelector} from '../Selectors/index'
 import {loadallArticles} from '../AC/ACreators'
 import Loader from './loader'
-
+import {NavLink, Route} from 'react-router-dom'
 
 class  ArticleList extends Component{
     
@@ -16,18 +14,25 @@ class  ArticleList extends Component{
     }
 
     render(){
-        const {articles, loading, openArticlId}  = this.props
+        const {articles, loading}  = this.props
         
-        if (loading) return <Loader/>
-    const articlElements = articles.map((articl) => <li key={articl.id}><Article article = {articl}
+    if (loading) return <Loader/>
+
+    const articlElements = articles.map((articl) => <li key={articl.id}>
+    <NavLink to={`/articles/${articl.id}`} activeStyle ={{color:'red'}}>
+    {articl.title}
+    </NavLink>
+    {/* <Article article = {articl}
     isOpen = { articl.id === openArticlId }
-    toggleOpenArticl = {this.props.toggleOpenArticl(articl.id)}/></li>)
+    toggleOpenArticl = {this.props.toggleOpenArticl(articl.id)}/> */}
+    
+    </li>)
 
     return(
-        <ul>
-            {articlElements}
-        </ul>
-    )
+            <ul>
+                {articlElements}
+            </ul>
+        )
     }
 }
 
@@ -37,5 +42,4 @@ export default connect( (state) =>{
      loading: state.articles.loading,
      loaded: state.articles.loaded,
      
- }
- }, {loadallArticles} ) (WrappedArticl(ArticleList))
+ }}, {loadallArticles} ) (ArticleList)

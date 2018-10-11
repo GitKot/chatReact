@@ -1,5 +1,5 @@
 
-import {INCREMENT, DELETE_ARTICL, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT, LOAD_OLL_ARTICLES, LOAD_ARTICLE, START, SUCCESS, FAIL, LOAD_COMMENTS} from '../CONSTANTS'
+import {INCREMENT, DELETE_ARTICL, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT, LOAD_OLL_ARTICLES, LOAD_ARTICLE, START, SUCCESS, FAIL, LOAD_COMMENTS, LOAD_OLL_COMMENTS} from '../CONSTANTS'
 
 
 export function ACcounter(){
@@ -84,6 +84,17 @@ export function loadComments(articleId){
         }, 500)
         }}
 
+export function loadPaginComments(page){
+    return(dispatch, getState) => {
+        const {commentsState:{pagination}} = getState()
+        if(pagination.getIn([page, 'loading']) || pagination.getIn([page, 'ids'])) return
+    
+    dispatch ({
+        type:LOAD_OLL_COMMENTS,
+        payload: {page},
+        callAPI:`/comment?limit=5&offset=${(page-1)*5}`
+    })}
+ }
 // export function loadArticle(id){
 //     return {
 //         type: LOAD_ARTICLE,

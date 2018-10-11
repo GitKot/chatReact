@@ -25,7 +25,7 @@ class Comment extends Component {
     getCommentList = () => {
         const {comments} = this.props
         if (comments.length == 0) return <p>{"No Comments"}</p>
-      console.log('comments', comments)
+    
     return  comments.map((comment)=> {
      
         return <li key={comment.id}><b>by: {comment.user}</b><br/>{comment.text}</li>}) 

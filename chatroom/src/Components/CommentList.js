@@ -9,7 +9,7 @@ class CommentList extends Component {
     
    
     render(){
-        const  {article, isOpen, toggleOpen, loadComments} = this.props
+        const  {isOpen, toggleOpen} = this.props
         return(
            <div>
                <button onClick = {toggleOpen}>{isOpen ? 'Close Comments':'Open Comments'}</button>
@@ -18,17 +18,12 @@ class CommentList extends Component {
         )
     }
     commentList = () =>  {
-        const  {article, isOpen, toggleOpen, loadComments, downloadCom} = this.props
+        const  {article, isOpen, loadComments, id} = this.props
         const {comments} = article
-        
-   
-         loadComments(article.id)
-       
+      
+        loadComments(id)
         return isOpen && <div>
         <Comment id = {comments}/> <NewComment id = {article.id} /></div>}
 }
 
-export default connect((state)=>{
-return{
-
-}}, {loadComments})(toggleOpen(CommentList))
+export default connect(null, {loadComments})(toggleOpen(CommentList))
