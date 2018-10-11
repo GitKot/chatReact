@@ -4,18 +4,19 @@ import ArticleList from './ArticleList'
 import Form from './UserForm'
 import Filter from './Filters'
 import Counter from './Counter'
-import {BrowserRouter as Router, Route, NavLink, Switch} from "react-router-dom"
 import Articles from './Routs/RoutAtricles'
 import NewArticle from "./Routs/NewRoute"
 import NotFound from "./Routs/NotFound"
 import CommentsList from "./Routs/CommentsList"
-
+import {Router, Route, NavLink, Switch, Redirect} from "react-router-dom"
+import history from '../history'
+import {ConnectedRouter} from 'react-router-redux'
 
 class App extends Component {
     static propTypes = {}
         render (){
             return(
-                <Router>
+                <ConnectedRouter history={history}>
                     <div>
                     <div>
                         <h2>Main Menu</h2>
@@ -34,11 +35,12 @@ class App extends Component {
                             <Route path = '/filters'  component = {Filter}/>
                             <Route path = '/articles/new' component = {NewArticle}/>
                             <Route path = '/articles' component = {Articles}/>
-                            <Route path = '/comments/:page' component = {CommentsList}/>
+                            <Route path = '/comments' component = {CommentsList}/>
+                            {/* <Redirect from ='/comments/' to={'/comments/1'} /> */}
                             <Route path = '*' component = {NotFound}/>
                         </Switch>
                     </div>
-                </Router>
+                </ConnectedRouter>
             )
         }
     }

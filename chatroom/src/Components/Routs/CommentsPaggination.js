@@ -26,9 +26,9 @@ class CommentsPaggination extends Component {
     }
     getCommentsItems(){
         const {comments, loading} = this.props
-        console.log('________',comments, loading )
+       
         if(loading || !comments) return <Loader/>
-        console.log('________',comments, loading )
+        
         const CommentsItems = comments.map(id => <li key= {id}><Comment id={id}/></li>)
         return <ul>{CommentsItems}</ul>
     }
