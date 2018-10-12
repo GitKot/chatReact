@@ -4,14 +4,21 @@ import toggleOpen from '../Decorators/toggleOpen'
 import NewComment from './NewComment/NewComments'
 import {loadComments} from '../AC/ACreators'
 import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
 
 class CommentList extends Component {  
-    
+    static contextTypes = {
+        store: PropTypes.object,
+        router: PropTypes.object,
+        user: PropTypes.string
+    }
    
     render(){
         const  {isOpen, toggleOpen} = this.props
+        console.log("--------", this.context)
         return(
            <div>
+               <div>User: {this.context.user}</div>
                <button onClick = {toggleOpen}>{isOpen ? 'Close Comments':'Open Comments'}</button>
                {this.commentList()}
            </div>

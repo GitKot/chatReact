@@ -40,7 +40,8 @@ export default (articleState = defaultState, action) => {
         case LOAD_OLL_ARTICLES+SUCCESS:
        
             return articleState
-                    .set('entities', arrToMap(response, ArticlRecord))
+                    .update('entities', entities=> 
+                        arrToMap(response, ArticlRecord).merge(entities))
                     .set('loading', false)
                     .set('loaded', true ) 
 

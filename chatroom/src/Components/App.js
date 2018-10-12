@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import ArticleList from './ArticleList'
 import Form from './UserForm'
 import Filter from './Filters'
 import Counter from './Counter'
@@ -14,6 +13,13 @@ import {ConnectedRouter} from 'react-router-redux'
 
 class App extends Component {
     static propTypes = {}
+    static childContextTypes = {
+        user: PropTypes.string,
+    }
+    getChildContext(){
+        return {user:'Andry'}
+    }
+
         render (){
             return(
                 <ConnectedRouter history={history}>

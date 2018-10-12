@@ -18,20 +18,22 @@ import Loader from '../loader'
          article: PropTypes.shape({
              id:PropTypes.string.isRequired,
              title: PropTypes.string.isRequired,
-             text: PropTypes.string
+             text: PropTypes.string.isRequired,
          })
      }
      
     componentDidMount(){
        const {loadArticle, article, id} = this.props
-       
+      
         if(!article || (!article.text && !article.loading))loadArticle(id)
         
     }
 
     
     render(){
+      
       const {article, isOpen, toggleOpenArticl} = this.props
+      
        if(!article) return null
      return(
         <div>
@@ -74,6 +76,7 @@ handlDelete = () => {
 }
 
 export default  connect((state, ownProps) => {
+    console.log("------------------------", state, ownProps)
     return{
     article: state.articles.entities.get(ownProps.id)
 }}, { deleteArticl, loadArticle})(Article)
